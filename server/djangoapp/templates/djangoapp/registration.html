@@ -6,6 +6,68 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
     <body>
+
+        <nav class="navbar navbar-light bg-light navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-brand">
+                  <a class="navbar-brand" href="#">Dealership Review</a>
+                  <a class="navbar-brand" href="{% url 'djangoapp:about' %}">About Us</a>
+                  <a class="navbar-brand" href="{% url 'djangoapp:contact' %}">Contact Us</a>
+                </div>
+    
+                {% if user.is_authenticated %}
+    
+                <div class="rightalign">
+                    <div class="dropdown-content">
+                        <a class="btn btn-link" href="">{{user.username}}</a>
+                        <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
+                        </div>
+                    </div>
+                </div>
+    
+                {% else %}
+    
+                <div>
+                    <form class="form-inline"action="{% url 'djangoapp:login' %}" method="post">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Username" name="username">
+                            <input type="password" class="form-control" placeholder="Password" name="psw">
+                            <button class="btn btn-light" href="{% url 'djangoapp:index' %}" type="submit">Log in</a>
+                            <button class="btn btn-light" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                            </div>
+                        </form>
+                    </div>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+
     <!--Add a registration form here -->
+    <div class="container">    
+    <div class="vertical-center relative-position">
+    <form class="col-lg-6 offset-lg-3">
+        <h1>Sign Up</h1>
+        <hr/>    
+        <div class="form-group">
+          <label for="username">User Name</label>
+          <input type="text" class="form-control" id="username" placeholder="Enter User Name">
+        </div>
+        <div class="form-group">
+            <label for="first_name">User Name</label>
+            <input type="text" class="form-control" id="first_name" placeholder="Enter First Name">
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" class="form-control" id="last_name" placeholder="Enter Last Name">
+        </div>
+        <div class="form-group">
+          <label for="psw">Password</label>
+          <input type="password" class="form-control" id="psw" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </form>
+    </div>
+    </div>
     </body>
 </html>
