@@ -30,5 +30,30 @@ from requests.auth import HTTPBasicAuth
 # - Call get_request() with specified arguments
 # - Get the returned sentiment label such as Positive or Negative
 
+def get_dealers_from_cf(url, **kwargs):
+    results = []
+    state = kwargs.get("state")
+    if state:
+        json_result = get_request(url, state=state)
+    else:
+        json_result = get_request(url)
 
+    # print('json_result from line 31', json_result)    
 
+    if json_result:
+        # Get the row list in JSON as dealers
+        print("63 - RA",json_result)
+        dealers = json_result
+        # For each dealer object
+        for dealer in dealers:
+            # Get its content in `doc` object
+            dealer_doc = dealer["doc"]
+            # print(dealer_doc)
+            # Create a CarDealer object with values in `doc` object
+            dealer_obj = CarDealer(address=dealer_doc["address"], city=dealer_doc["city"],
+                                   id=dealer_doc["id"], lat=dealer_doc["lat"], long=dealer_doc["long"], full_name=dealer_doc["full_name"],
+                                
+                                   st=dealer_doc["st"], zip=dealer_doc["zip"])
+            results.append(dealer_obj)
+
+    return results
