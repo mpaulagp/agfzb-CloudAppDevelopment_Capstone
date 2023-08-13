@@ -13,8 +13,8 @@ urlpatterns = [
     path(route='contact/', view=views.contact, name='contact'),
     
     # path for registration, dealer details, add a review, login, logout
-#    path('dealer/<int:id>/', views.get_dealer_details, name='dealer_details'),
-#    path('dealer/<int:id>/review', views.add_review, name='add_review'),
+    path('dealer/<int:id>/', views.get_dealer_details, name='dealer_details'),
+    path('dealer/<int:id>/review', views.add_review, name='add_review'),
     path('registration/', views.registration_request, name='registration'),
     path('login/', views.login_request, name='login'),
     path('logout/', views.logout_request, name='logout'),
